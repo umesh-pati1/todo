@@ -1,0 +1,21 @@
+<div class="todo-app">
+    <div class="todo-input-form">
+        <form (ngSubmit)="addTodo()">
+            <input class="todo-input" name="todo" type="text" placeholder="Enter Todo..." [(ngModel)]="newTodo" >
+            <input class="submit" type="submit" value="Add Todo">
+        </form>
+    </div>
+    <div class="todo-list">
+        <div *ngFor="let todo of todos;let i=index" class="todo">
+            <div class="content">
+                <div *ngIf="!todo.edit; else edit" class="title" (dblclick)="editTodo(i)">{{todo.title}}</div>
+                <ng-template #edit>
+                    <input class="todo-input-edit" type="text" [(ngModel)]="todo.title" (keyup.enter)="disableEdit(i)">
+                </ng-template>
+            </div>
+            <div class="delete">
+                <button (click)="deleteTodo(i)">remove</button>
+            </div>
+        </div>
+    </div>
+</div>
